@@ -1,4 +1,4 @@
-FROM python:3.10 as python-base
+FROM python:3.12 as python-base
 RUN mkdir air_transportation_image
 WORKDIR  /air_transportation_image
 COPY /pyproject.toml /air_transportation_image
