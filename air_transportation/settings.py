@@ -20,7 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "django-insecure-&po)6u5_v*k%h340qt(8x&2ikw-i=bcy*jw4i6fr)4d#zele_r"
+    "SECRET_KEY",
+    default="django-insecure-&po)6u5_v*k%h340qt(8x&2ikw-i=bcy*jw4i6fr)4d#zele_r",
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "client",
     "available_cities",
     "aviation_personnel",
+    "aircraft",
 ]
 
 MIDDLEWARE = [
@@ -108,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -123,5 +125,7 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
