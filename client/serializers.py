@@ -1,8 +1,42 @@
 from rest_framework import serializers
-from .models import Client
+
+from .models import Client, ClientOrder
 
 
-class ClientSerializer(serializers.ModelSerializer):
+class ClientOrderBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientOrder
+
+
+class ClientOrderSerializer(ClientOrderBaseSerializer):
+    class Meta(ClientOrderBaseSerializer.Meta):
+        fields = "__all__"
+
+
+class ClientBaseSerializer(serializers.ModelSerializer):
+    order = ClientOrderSerializer()
+
     class Meta:
         model = Client
-        exclude = ["id"]
+
+
+class ClientReadOnlySerializer(ClientOrderSerializer):
+    class Meta(ClientOrderSerializer.Meta):
+        fields = "__all__"
+
+
+class ClientCreateSerializer(ClientBaseSerializer):
+    class Meta(ClientBaseSerializer.Meta):
+        fields = "__all__"
+        read_only_fields = ["busy"]
+
+    def create(self, validated_data):
+        order = validated_data.pop("order")
+        client_order = ClientOrder.objects.create(**order)
+        client = Client.objects.create(**validated_data, order=client_order)
+        return client
+
+
+class ClientUpdateSerializer(ClientBaseSerializer):
+    class Meta(ClientBaseSerializer.Meta):
+        fields = "__all__"

@@ -1,9 +1,31 @@
-from django.shortcuts import render
+from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics
 from .models import Client
-from .serializers import ClientSerializer
+from .serializers import (
+    ClientReadOnlySerializer,
+    ClientCreateSerializer,
+    ClientUpdateSerializer,
+)
 
 
-class ClientViewSet(viewsets.ModelViewSet):
+class ClientReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+    serializer_class = ClientReadOnlySerializer
+
+
+class ClientCreateAPIView(generics.CreateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientCreateSerializer
+
+
+class ClientUpdateAPIView(generics.UpdateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientUpdateSerializer
+
+
+class ClientDeleteAPIView(generics.DestroyAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientReadOnlySerializer

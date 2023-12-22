@@ -3,7 +3,7 @@ from rest_framework import routers
 
 from available_cities import views
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register(r"cities", views.AvailableCitiesViewSet)
 
 

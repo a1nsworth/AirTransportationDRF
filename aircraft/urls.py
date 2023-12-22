@@ -1,8 +1,16 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import AircraftViewSet
+from django.urls import path
 
-router = routers.DefaultRouter()
-router.register(r"aircraft", AircraftViewSet)
+from .views import (
+    AircraftReadOnlyViewSet,
+    AircraftUpdateAPIView,
+    AircraftCreateAPIView,
+    AircraftDeleteAPIView,
+)
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("aircraft/", AircraftReadOnlyViewSet.as_view({"get": "list"})),
+    path("aircraft/<int:pk>/", AircraftReadOnlyViewSet.as_view({"get": "retrieve"})),
+    path("aircraft/create/", AircraftCreateAPIView.as_view()),
+    path("aircraft/update/<int:pk>", AircraftUpdateAPIView.as_view()),
+    path("aircraft/delete/<int:pk>", AircraftDeleteAPIView.as_view()),
+]
