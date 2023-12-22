@@ -1,8 +1,18 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import AviationPersonnelViewSet
+from django.urls import path
 
-router = routers.DefaultRouter()
-router.register(r"aviation_personnel", AviationPersonnelViewSet)
+from .views import (
+    AviationPersonnelUpdateAPIView,
+    AviationPersonnelCreateAPIView,
+    AviationPersonnelReadOnlyViewSet,
+    AviationPersonnelDeleteAPIView,
+)
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("personnel/", AviationPersonnelReadOnlyViewSet.as_view({"get": "list"})),
+    path(
+        "personnel/<int:pk>/", AviationPersonnelReadOnlyViewSet.as_view({"get": "retrieve"})
+    ),
+    path("personnel/create/", AviationPersonnelCreateAPIView.as_view()),
+    path("personnel/update/<int:pk>/", AviationPersonnelUpdateAPIView.as_view()),
+    path("personnel/delete/<int:pk>/", AviationPersonnelDeleteAPIView.as_view()),
+]

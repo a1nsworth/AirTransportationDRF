@@ -41,6 +41,7 @@ urlpatterns = [
                 path("", include("aviation_personnel.urls")),
                 path("", include("available_cities.urls")),
                 path("", include("aircraft.urls")),
+                path("", include("flight.urls")),
                 path(
                     "docs",
                     schema_view.with_ui("swagger", cache_timeout=0),
