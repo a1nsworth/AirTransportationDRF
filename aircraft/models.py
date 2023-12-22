@@ -3,12 +3,14 @@ from abstract_models.models import AbstractBusy
 
 
 class AircraftDescription(models.Model):
-    description = models.TextField()
-    image = models.ImageField(upload_to="aircraft/")
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(
+        upload_to="aircraft/", null=True, blank=True, default=None
+    )
 
 
 class AircraftCharacteristic(models.Model):
-    assistant_pilot = models.BooleanField(default=False)
+    capacity_peoples = models.PositiveSmallIntegerField(default=2)
 
 
 class Aircraft(AbstractBusy):
