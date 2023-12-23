@@ -2,7 +2,7 @@
 
 echo "...Creating Supper User..."
 
-python manage.py createsuperuser --username=admin --email=admin@admin.com --noinput
+source '.env' && python manage.py createsuperuser --username=admin_root --email=admin_root@admin.com --noinput
 
 echo "...Running Migrations..."
 python manage.py makemigration
