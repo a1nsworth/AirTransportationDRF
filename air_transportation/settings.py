@@ -28,7 +28,16 @@ SECRET_KEY = os.environ.get(
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = "*"
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+    "http://localhost:3000",
+    "http://192.168.137.1",
+    "http://185.253.182.184",
+    "https://*.127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -38,6 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",
     "drf_yasg",
     "corsheaders",
     "dbbackup",
@@ -61,17 +72,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
-
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = "*"
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.onrender.com",
-    "http://localhost:3000",
-    "http://192.168.137.1",
-    "http://185.253.182.184",
-    "https://*.127.0.0.1",
 ]
 
 ROOT_URLCONF = "air_transportation.urls"
