@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,12 +40,16 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "corsheaders",
+    "dbbackup",
     "client",
     "available_cities",
     "aviation_personnel",
     "aircraft",
     "flight",
 ]
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": "backups/"}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -60,10 +63,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOWED_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOW_METHODS = "*"
+CSRF_TRUSTED_ORIGINS = True
 
 ROOT_URLCONF = "air_transportation.urls"
 
