@@ -66,7 +66,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = "*"
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://192.168.137.1", "http://185.253.182.184"]
 
 ROOT_URLCONF = "air_transportation.urls"
 
