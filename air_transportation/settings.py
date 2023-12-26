@@ -28,9 +28,16 @@ SECRET_KEY = os.environ.get(
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = "*"
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost",
+]
 CORS_ALLOW_HEADERS = [
     "Access-Control-Allow-Origin",
     "Access-Control-Allow-Credentials",
@@ -38,17 +45,20 @@ CORS_ALLOW_HEADERS = [
     "content-type",
     "x-csrftoken",
 ]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.onrender.com",
-    "http://localhost:3000",
-    "http://192.168.137.1",
-    "http://185.253.182.184",
-    "https://*.127.0.0.1",
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "OPTIONS",
+    "PATCH",
+    "UPDATE",
+    "DESTROY",
 ]
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
