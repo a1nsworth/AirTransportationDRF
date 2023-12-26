@@ -38,12 +38,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost",
 ]
-CORS_ALLOW_HEADERS = [
-    "Access-Control-Allow-Origin",
-    "Access-Control-Allow-Credentials",
-    "headers",
-    "content-type",
-    "x-csrftoken",
+CORS_ALLOWED_HEADERS = [
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Methods',
+    'Access-Control-Allow-Headers',
+    'Content-Type',  # Ваш желаемый заголовок
+    'X-CSRFToken',   # Если вы используете CSRF
 ]
 CORS_ALLOW_METHODS = [
     "GET",
