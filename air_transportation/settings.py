@@ -30,22 +30,26 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CSRF_COOKIE_HTTPONLY = True
 
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
+
+SESSION_COOKIE_SAMESITE = None
+
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost",
 ]
 CORS_ALLOWED_HEADERS = [
-    'Access-Control-Allow-Origin',
-    'Access-Control-Allow-Methods',
-    'Access-Control-Allow-Headers',
-    'Content-Type',  # Ваш желаемый заголовок
-    'X-CSRFToken',   # Если вы используете CSRF
+    "Access-Control-Allow-Origin",
+    "Access-Control-Allow-Methods",
+    "Access-Control-Allow-Headers",
+    "Content-Type",  # Ваш желаемый заголовок
+    "X-CSRFToken",  # Если вы используете CSRF
 ]
 CORS_ALLOW_METHODS = [
     "GET",
