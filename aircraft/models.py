@@ -4,9 +4,6 @@ from abstract_models.models import AbstractBusy
 
 class AircraftDescription(models.Model):
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(
-        upload_to="aircraft/", null=True, blank=True, default=None
-    )
 
 
 class AircraftCharacteristic(models.Model):

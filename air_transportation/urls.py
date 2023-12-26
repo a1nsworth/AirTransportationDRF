@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 from django.conf import settings
@@ -30,6 +30,7 @@ schema_view = swagger_get_schema_view(
     public=True,
 )
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
@@ -37,6 +38,8 @@ urlpatterns = [
         "api/v1/",
         include(
             [
+                url(r"^auth/", include("djoser.urls")),
+                re_path(r"^auth/", include("djoser.urls.authtoken")),
                 path("", include("client.urls")),
                 path("", include("aviation_personnel.urls")),
                 path("", include("available_cities.urls")),
@@ -51,6 +54,5 @@ urlpatterns = [
         ),
     ),
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

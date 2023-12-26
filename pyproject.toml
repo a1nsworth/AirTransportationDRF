@@ -18,6 +18,11 @@ dj-database-url = "^2.1.0"
 whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 pillow = "^10.1.0"
 django-cors-headers = "^4.3.1"
+django-yabackup = "^0.1.2"
+six = "^1.16.0"
+django-dbbackup = "^4.0.2"
+yadisk = "^2.0.0"
+djoser = "^2.2.2"
 
 
 [build-system]
