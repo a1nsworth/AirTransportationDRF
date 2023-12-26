@@ -45,6 +45,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://185.253.182.184",
     "https://*.127.0.0.1",
 ]
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
