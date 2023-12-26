@@ -31,6 +31,13 @@ ALLOWED_HOSTS = ["*"]
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = "*"
+CORS_ALLOW_HEADERS = [
+    "Access-Control-Allow-Origin",
+    "Access-Control-Allow-Credentials",
+    "headers",
+    "content-type",
+    "x-csrftoken",
+]
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "http://localhost:3000",
@@ -46,7 +53,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework.authtoken'
+    "rest_framework",
     "djoser",
     "drf_yasg",
     "corsheaders",

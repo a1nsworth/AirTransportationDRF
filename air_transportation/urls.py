@@ -38,8 +38,6 @@ urlpatterns = [
         "api/v1/",
         include(
             [
-                url(r"^auth/", include("djoser.urls")),
-                re_path(r"^auth/", include("djoser.urls.authtoken")),
                 path("", include("client.urls")),
                 path("", include("aviation_personnel.urls")),
                 path("", include("available_cities.urls")),
