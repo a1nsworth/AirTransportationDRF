@@ -38,6 +38,7 @@ CORS_ALLOW_HEADERS = [
     "content-type",
     "x-csrftoken",
 ]
+
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "http://localhost:3000",
@@ -47,6 +48,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
