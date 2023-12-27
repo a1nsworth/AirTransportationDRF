@@ -11,5 +11,5 @@ RUN poetry install
 
 COPY . .
 
-RUN chmod a+x ./setup.sh
-CMD ./setup.sh
+RUN chmod a+x ./scripts/setup.sh
+CMD ./scripts/setup.sh
