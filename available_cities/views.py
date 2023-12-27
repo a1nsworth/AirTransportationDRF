@@ -7,4 +7,3 @@ from .serializers import AvailableCitiesSerializer
 class AvailableCitiesViewSet(viewsets.ModelViewSet):
     queryset = AvailableCities.objects.all()
     serializer_class = AvailableCitiesSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

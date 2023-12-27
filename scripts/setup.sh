@@ -11,8 +11,5 @@ echo "current DONE"
 
 echo "...Starting app..."
 
-/backup.sh
-/planner.sh
-
 gunicorn air_transportation.wsgi:application
 
