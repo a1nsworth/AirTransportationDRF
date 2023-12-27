@@ -1,4 +1,7 @@
 FROM python:3.12 as python-base
+RUN sudo apt update
+RUN sudo apt install cron
+RUN sudo systemctl enable cron
 RUN mkdir air_transportation_image
 WORKDIR  /air_transportation_image
 COPY /pyproject.toml /air_transportation_image
