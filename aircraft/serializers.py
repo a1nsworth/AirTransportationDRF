@@ -63,7 +63,6 @@ class AircraftUpdateSerializer(AircraftSerializerBase):
         fields = "__all__"
 
     def update(self, instance, validated_data):
-        functions.update_instance(instance, validated_data).save()
         functions.update_instance(
             AircraftDescription.objects.get(pk=instance.description_id),
             validated_data.pop("description", None),
@@ -72,6 +71,7 @@ class AircraftUpdateSerializer(AircraftSerializerBase):
             AircraftCharacteristic.objects.get(pk=instance.characteristic_id),
             validated_data.pop("characteristic", None),
         ).save()
+        functions.update_instance(instance, validated_data).save()
 
         return instance
 

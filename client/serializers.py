@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Client, ClientOrder
+from utils import functions
 
 
 class ClientOrderBaseSerializer(serializers.ModelSerializer):
@@ -40,3 +41,9 @@ class ClientCreateSerializer(ClientBaseSerializer):
 class ClientUpdateSerializer(ClientBaseSerializer):
     class Meta(ClientBaseSerializer.Meta):
         fields = "__all__"
+
+    def update(self, instance, validated_data):
+        functions.update_instance(instance, validated_data.pop("order")).save()
+        functions.update_instance(instance, validated_data).save()
+
+        return instance
