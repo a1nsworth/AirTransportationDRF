@@ -1,10 +1,8 @@
-from django.db.models import QuerySet
-from django.db.models.sql import RawQuery
+from import_export import resources
 from rest_framework import viewsets, generics, views
 
 from utils import export
 from .models import Aircraft
-from .resource import AircraftResource
 from .serializers import (
     AircraftReadOnlySerializer,
     AircraftUpdateSerializer,
@@ -14,7 +12,7 @@ from .serializers import (
 
 
 class AircraftExportAPIView(views.APIView):
-    def post(self, request, fmt, format=None):
+    def post(self, request, fmt):
         queryset = Aircraft.objects
         if (
             request.data.get("sql_request") is None
@@ -23,8 +21,12 @@ class AircraftExportAPIView(views.APIView):
             queryset = queryset.all()
         else:
             queryset = queryset.raw(request.data.get("sql_request"))
+
         return export.export_queryset(
-            AircraftResource, queryset, Aircraft._meta.model_name, fmt
+            resources.modelresource_factory(model=Aircraft),
+            queryset,
+            Aircraft._meta.model_name,
+            fmt,
         )
 
 

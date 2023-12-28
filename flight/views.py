@@ -1,14 +1,31 @@
-from django.contrib.staticfiles.views import serve
-from rest_framework import viewsets, status, permissions
-from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework import viewsets, generics, views
+from import_export import resources
 from flight.models import Flight, FlightComposition
+from utils import export
 from .serializers import (
     RepresentationFlightSerializer,
     RepresentationFlightCompositionSerializer,
     CreateUpdateFlightSerializer,
-    CreateUpdateFlightCompositionSerializer,
 )
+
+
+class FlightExportAPIView(views.APIView):
+    def post(self, request, fmt):
+        queryset = Flight.objects
+        if (
+            request.data.get("sql_request") is None
+            or request.data.get("sql_request") == " "
+        ):
+            queryset = queryset.all()
+        else:
+            queryset = queryset.raw(request.data.get("sql_request"))
+
+        return export.export_queryset(
+            resources.modelresource_factory(model=Flight),
+            queryset,
+            Flight._meta.model_name,
+            fmt,
+        )
 
 
 class FlightCompositionModelViewSet(viewsets.ModelViewSet):
