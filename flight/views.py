@@ -5,7 +5,7 @@ from utils import export
 from .serializers import (
     RepresentationFlightSerializer,
     RepresentationFlightCompositionSerializer,
-    CreateUpdateFlightSerializer,
+    CreateCreateUpdateFlightSerializer,
 )
 
 
@@ -45,9 +45,9 @@ class FlightDeleteAPIView(generics.DestroyAPIView):
 
 class FlightCreateAPIView(generics.CreateAPIView):
     queryset = Flight.objects.all()
-    serializer_class = CreateUpdateFlightSerializer
+    serializer_class = CreateCreateUpdateFlightSerializer
 
 
 class FlightUpdateAPIView(generics.UpdateAPIView):
     queryset = Flight.objects.all()
-    serializer_class = CreateUpdateFlightSerializer
+    serializer_class = CreateCreateUpdateFlightSerializer

@@ -46,6 +46,7 @@ class FlightComposition(models.Model):
         "aviation_personnel.AviationPersonnel",
         related_name="flight_composition",
         null=True,
+        blank=True,
         default=None,
         limit_choices_to=Q(busy=False) & (Q(role="STEWARD") | Q(role="ENGINEER")),
     )

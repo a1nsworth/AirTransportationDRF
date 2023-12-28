@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Flight, FlightComposition
+from utils import functions
 
 
 class BaseFlightCompositionSerializer(serializers.ModelSerializer):
@@ -53,7 +54,7 @@ class RepresentationFlightSerializer(BaseFlightSerializer):
         raise NotImplementedError("Serializer is Representation, not implemented")
 
 
-class CreateUpdateFlightSerializer(BaseFlightSerializer):
+class CreateCreateUpdateFlightSerializer(BaseFlightSerializer):
     composition = CreateUpdateFlightCompositionSerializer()
 
     class Meta(BaseFlightSerializer.Meta):
@@ -66,3 +67,21 @@ class CreateUpdateFlightSerializer(BaseFlightSerializer):
         for steward in steward_data:
             composition.stewards.add(steward)
         return Flight.objects.create(composition=composition, **validated_data)
+
+    def update(self, instance, validated_data):
+        composition_data = validated_data.pop("composition")
+        steward_data = composition_data.pop("stewards")
+
+        flight_composition_instance = functions.update_instance(
+            FlightComposition.objects.get(pk=instance.composition_id),
+            composition_data,
+        )
+        if len(steward_data) == 0:
+            flight_composition_instance.stewards.clear()
+        else:
+            for steward in steward_data:
+                flight_composition_instance.stewards.add(steward)
+
+        flight_composition_instance.save()
+        functions.update_instance(instance, validated_data).save()
+        return instance

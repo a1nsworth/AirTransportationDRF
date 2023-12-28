@@ -43,7 +43,9 @@ class ClientUpdateSerializer(ClientBaseSerializer):
         fields = "__all__"
 
     def update(self, instance, validated_data):
-        functions.update_instance(instance, validated_data.pop("order")).save()
+        functions.update_instance(
+            ClientOrder.objects.get(pk=instance.order_id), validated_data.pop("order")
+        ).save()
         functions.update_instance(instance, validated_data).save()
 
         return instance
