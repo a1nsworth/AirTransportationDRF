@@ -8,7 +8,7 @@ class AircraftDescription(models.Model):
 
 
 class AircraftCharacteristic(models.Model):
-    capacity_peoples = models.PositiveSmallIntegerField(default=2)
+    capacity_peoples = models.PositiveSmallIntegerField()
 
 
 class Aircraft(AbstractBusy):
