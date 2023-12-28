@@ -23,6 +23,7 @@ six = "^1.16.0"
 django-dbbackup = "^4.0.2"
 yadisk = "^2.0.0"
 djoser = "^2.2.2"
+django-import-export = "^3.3.5"
 
 
 [build-system]

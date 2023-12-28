@@ -1,5 +1,6 @@
 from django.db import models
 from abstract_models.models import AbstractBusy
+from import_export import resources
 
 
 class AircraftDescription(models.Model):
