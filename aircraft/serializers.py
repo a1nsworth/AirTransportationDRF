@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Aircraft, AircraftCharacteristic, AircraftDescription
+from utils import functions
 
 
 class AircraftDescriptionSerializerBase(serializers.ModelSerializer):
@@ -61,19 +62,13 @@ class AircraftUpdateSerializer(AircraftSerializerBase):
     class Meta(AircraftSerializerBase.Meta):
         fields = "__all__"
 
-    @staticmethod
-    def update_instance(instance, validated_data):
-        for key, value in validated_data.items():
-            setattr(instance, key, value)
-        return instance
-
     def update(self, instance, validated_data):
-        self.update_instance(instance, validated_data).save()
-        self.update_instance(
+        functions.update_instance(instance, validated_data).save()
+        functions.update_instance(
             AircraftDescription.objects.get(pk=instance.description_id),
             validated_data.pop("description", None),
         ).save()
-        self.update_instance(
+        functions.update_instance(
             AircraftCharacteristic.objects.get(pk=instance.characteristic_id),
             validated_data.pop("characteristic", None),
         ).save()
