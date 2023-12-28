@@ -21,8 +21,8 @@ class ClientBaseSerializer(serializers.ModelSerializer):
         model = Client
 
 
-class ClientReadOnlySerializer(ClientOrderSerializer):
-    class Meta(ClientOrderSerializer.Meta):
+class ClientReadOnlySerializer(ClientBaseSerializer):
+    class Meta(ClientBaseSerializer.Meta):
         fields = "__all__"
 
 
@@ -34,7 +34,7 @@ class ClientCreateSerializer(ClientBaseSerializer):
     def create(self, validated_data):
         order = validated_data.pop("order")
         client_order = ClientOrder.objects.create(**order)
-        client = Client.objects.create(**validated_data, order=client_order)
+        client = Client.objects.create(order=client_order, **validated_data)
         return client
 
 

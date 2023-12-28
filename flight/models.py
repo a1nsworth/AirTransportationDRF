@@ -3,7 +3,7 @@ from django.db.models import Q
 
 
 class FlightComposition(models.Model):
-    aircraft_id = models.OneToOneField(
+    aircraft_id = models.ForeignKey(
         "aircraft.Aircraft",
         null=True,
         default=None,
@@ -11,7 +11,7 @@ class FlightComposition(models.Model):
         related_name="flight_aircraft",
         limit_choices_to={"busy": False},
     )
-    client_id = models.OneToOneField(
+    client_id = models.ForeignKey(
         "client.Client",
         null=True,
         default=None,
@@ -19,7 +19,7 @@ class FlightComposition(models.Model):
         related_name="flight_client",
     )
 
-    pilot_main = models.OneToOneField(
+    pilot_main = models.ForeignKey(
         "aviation_personnel.AviationPersonnel",
         null=True,
         default=None,

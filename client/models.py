@@ -3,7 +3,7 @@ from django.db import models
 
 
 class ClientOrder(models.Model):
-    desired_aircraft = models.OneToOneField(
+    desired_aircraft = models.ForeignKey(
         "aircraft.Aircraft",
         null=True,
         default=None,
